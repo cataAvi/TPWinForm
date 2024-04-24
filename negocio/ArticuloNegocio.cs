@@ -19,9 +19,9 @@ namespace negocio
 
             try
             {
-                conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_P3_DB;";
+                conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true;";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select Codigo,Nombre, Descripcion, Precio from ARTICULOS";
+                comando.CommandText = "select A.Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion as Categoria, C.Id as IDCategoria, M.Descripcion as Marca, M.Id as IDMarca from ARTICULOS as A inner join MARCAS AS M on IdMarca = M.Id inner join CATEGORIAS AS C on IdCategoria = C.Id";
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -35,27 +35,30 @@ namespace negocio
                     aux.CodArticulo = (string)lector["Codigo"];
                     aux.Nombre = (string)lector["Nombre"];
                     aux.Descripcion = (string)lector["Descripcion"];
-                    //aux.Marca = new Marca();
-                    //aux.Marca.Id = (int)datos.Lector["IdMarca"];
-                    //aux.Marca.Descripcion = (string)datos.Lector["Marca"];
-                    //aux.Categoria = new Categoria();
-                    //aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
-                    //aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
-                    //aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
-
-                    //Yo no crearia un objeto de marca, categoria, etc, sino que usaria un inner join en la consulta SQL para traer la info del nombre de la marca por ejemplo
+                    Marca artmarca = new Marca();
+                    artmarca.Id = (int)lector["IDMarca"];
+                    artmarca.Descripcion = (string)lector["Marca"];
+                    aux.Marca = artmarca;
+                    Categoria cat = new Categoria();
+                    cat.Id = (int)lector["IDCategoria"];
+                    cat.Descripcion = (string)lector["Categoria"];
+                    aux.Categoria = cat;
+                    //aux.ImagenUrl = (string)lector["ImagenUrl"];
 
                     aux.Precio = (decimal)lector["Precio"];
 
                     lista.Add(aux);
                 }
 
-                conexion.Close(); //Modificar y luego colocar en finally
                 return lista;
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                conexion.Close();
             }
         }
 
