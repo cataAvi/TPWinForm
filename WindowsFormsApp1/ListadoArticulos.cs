@@ -7,20 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using negocio;
+
+
 
 namespace WindowsFormsApp1
 {
-    public partial class FormPrincipal : Form
+    public partial class ListadoArticulos : Form
     {
-        public FormPrincipal()
+        public ListadoArticulos()
         {
             InitializeComponent();
         }
 
-        private void btnListar_Click(object sender, EventArgs e)
+
+
+        private void ListadoArticulos_Load_1(object sender, EventArgs e)
         {
-             ListadoArticulos formla = new ListadoArticulos();
-             formla.Show();
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            dataGridView2.DataSource = negocio.listar();
         }
     }
 }

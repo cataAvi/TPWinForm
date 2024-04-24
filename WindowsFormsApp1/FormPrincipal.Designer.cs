@@ -41,6 +41,7 @@ namespace WindowsFormsApp1
             this.buttonAgregar = new System.Windows.Forms.Button();
             this.pictureBoxArticulo = new System.Windows.Forms.PictureBox();
             this.dataGridViewArticuloBD = new System.Windows.Forms.DataGridView();
+            this.btnListar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArticulo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewArticuloBD)).BeginInit();
             this.SuspendLayout();
@@ -143,11 +144,22 @@ namespace WindowsFormsApp1
             this.dataGridViewArticuloBD.Size = new System.Drawing.Size(961, 244);
             this.dataGridViewArticuloBD.TabIndex = 11;
             // 
+            // btnListar
+            // 
+            this.btnListar.Location = new System.Drawing.Point(80, 488);
+            this.btnListar.Name = "btnListar";
+            this.btnListar.Size = new System.Drawing.Size(259, 52);
+            this.btnListar.TabIndex = 22;
+            this.btnListar.Text = "Listar";
+            this.btnListar.UseVisualStyleBackColor = true;
+            this.btnListar.Click += new System.EventHandler(this.btnListar_Click);
+            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1020, 610);
+            this.Controls.Add(this.btnListar);
             this.Controls.Add(this.buttonBuscar);
             this.Controls.Add(this.comboBoxCriterio);
             this.Controls.Add(this.comboBoxCampo);
@@ -181,5 +193,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button buttonAgregar;
         private System.Windows.Forms.PictureBox pictureBoxArticulo;
         private System.Windows.Forms.DataGridView dataGridViewArticuloBD;
+        private System.Windows.Forms.Button btnListar;
     }
 }

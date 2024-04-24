@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using dominio;
+using System.Data.SqlClient;
 
 namespace negocio
 {
@@ -12,32 +13,44 @@ namespace negocio
         public List<Articulo> listar()
         {
             List<Articulo> lista = new List<Articulo>();
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;   
+
             try
             {
-                AccesoDatos datos = new AccesoDatos();
+                conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_P3_DB;";
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "select Codigo,Nombre, Descripcion, Precio from ARTICULOS";
+                comando.Connection = conexion;
 
-                datos.setarConsulta("select A.Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion Categoria, M.Descripcion Marca, I.ImagenUrl, A.Id, A.IdMarca, A.IdCategoria from ARTICULOS A, CATEGORIAS C, MARCAS M, IMAGENES I where C.Id=A.IdCategoria and M.Id=A.IdMarca and A.Id=I.IdArticulo");
-                datos.ejectuarLectura();
+                conexion.Open();
+                lector = comando.ExecuteReader();
 
-                while (datos.Lector.Read())
+
+                while (lector.Read())
                 {
                     Articulo aux = new Articulo();
-                    aux.Id = (int)datos.Lector["Id"];
-                    aux.CodArticulo = (string)datos.Lector["Codigo"];
-                    aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Marca = new Marca();
-                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
-                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
-                    aux.Categoria = new Categoria();
-                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
-                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
-                    aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
-                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    
+                    aux.CodArticulo = (string)lector["Codigo"];
+                    aux.Nombre = (string)lector["Nombre"];
+                    aux.Descripcion = (string)lector["Descripcion"];
+                    //aux.Marca = new Marca();
+                    //aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    //aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    //aux.Categoria = new Categoria();
+                    //aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    //aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    //aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+
+                    //Yo no crearia un objeto de marca, categoria, etc, sino que usaria un inner join en la consulta SQL para traer la info del nombre de la marca por ejemplo
+
+                    aux.Precio = (decimal)lector["Precio"];
 
                     lista.Add(aux);
                 }
 
+                conexion.Close(); //Modificar y luego colocar en finally
                 return lista;
             }
             catch (Exception ex)
