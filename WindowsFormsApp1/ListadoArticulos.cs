@@ -33,6 +33,8 @@ namespace WindowsFormsApp1
         private void dataGridView2_SelectionChanged_1(object sender, EventArgs e)
         {
             Articulo seleccionado = (Articulo)dataGridView2.CurrentRow.DataBoundItem;
+            dataGridView2.Columns["ImagenUrl"].Visible = false;
+            dataGridView2.Columns["Id"].Visible = false;
             cargarImagen(seleccionado.ImagenUrl);
         }
 
