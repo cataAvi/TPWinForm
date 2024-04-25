@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using negocio;
+using dominio;
+using WindowsFormsApp1;
 
 namespace WindowsFormsApp1
 {
@@ -23,10 +26,14 @@ namespace WindowsFormsApp1
              formla.Show();
         }
 
+
+
         private void buttonAgregar_Click(object sender, EventArgs e)
         {
             frmAltaArticulo alta = new frmAltaArticulo();
             alta.ShowDialog();
+            ListadoArticulos listart = new ListadoArticulos();
+            listart.cargar();
         }
     }
 }

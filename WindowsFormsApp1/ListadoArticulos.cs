@@ -38,6 +38,23 @@ namespace WindowsFormsApp1
             cargarImagen(seleccionado.ImagenUrl);
         }
 
+        public void cargar() //tuve que ponerlo public porque desde el formPrincipal es donde está el botón de agregar pero la lógica del listado está en este form. Cree en el mismo una instancia del objeto para usar este metodo-
+        {
+
+            Articulo seleccionado = (Articulo)dataGridView2.CurrentRow.DataBoundItem;
+
+            try
+            {
+                dataGridView2.Columns["ImagenUrl"].Visible = false;
+                dataGridView2.Columns["Id"].Visible = false;
+                cargarImagen(seleccionado.ImagenUrl);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         private void cargarImagen(string imagen)
         {
             try
