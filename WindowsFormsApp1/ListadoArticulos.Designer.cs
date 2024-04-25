@@ -30,7 +30,9 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.pcbximg = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbximg)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView2
@@ -42,14 +44,26 @@ namespace WindowsFormsApp1
             this.dataGridView2.RowTemplate.Height = 24;
             this.dataGridView2.Size = new System.Drawing.Size(550, 355);
             this.dataGridView2.TabIndex = 0;
+            this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged_1);
+            // 
+            // pcbximg
+            // 
+            this.pcbximg.Location = new System.Drawing.Point(632, 26);
+            this.pcbximg.Name = "pcbximg";
+            this.pcbximg.Size = new System.Drawing.Size(298, 304);
+            this.pcbximg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pcbximg.TabIndex = 1;
+            this.pcbximg.TabStop = false;
             // 
             // ListadoArticulos
             // 
-            this.ClientSize = new System.Drawing.Size(611, 419);
+            this.ClientSize = new System.Drawing.Size(1002, 373);
+            this.Controls.Add(this.pcbximg);
             this.Controls.Add(this.dataGridView2);
             this.Name = "ListadoArticulos";
             this.Load += new System.EventHandler(this.ListadoArticulos_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbximg)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -58,5 +72,6 @@ namespace WindowsFormsApp1
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.PictureBox pcbximg;
     }
 }

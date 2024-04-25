@@ -64,7 +64,6 @@
     <Compile Include="FormPrincipal.Designer.cs">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Imagen.cs" />
     <Compile Include="ListadoArticulos.cs">
       <SubType>Form</SubType>
     </Compile>
