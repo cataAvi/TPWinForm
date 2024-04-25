@@ -31,9 +31,9 @@ namespace WindowsFormsApp1
 
             try
             {
-                art.Precio = decimal.Parse(tbCodArt.Text);
+                art.Precio = decimal.Parse(tbPrecio.Text);
                 art.Nombre = tbNombre.Text;
-                art.ImagenUrl = tbImagen.Text;
+                art.ImagenUrl = tbURLImagen.Text;
                 art.Descripcion = tbDescripcion.Text;
                 art.CodArticulo = tbCodArt.Text;
                 art.Marca = (Marca)cbMarca.SelectedItem;
@@ -67,6 +67,24 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void tbURLImagen_Leave(object sender, EventArgs e)
+        {
+            cargarImagen(tbURLImagen.Text);
+        }
+
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                pbImagenArt.Load(imagen);
+            }
+            catch
+            {
+                pbImagenArt.Load("https://www.rivera.gub.uy/portal/wp-content/uploads/2017/02/imagen-no-disponible-820x513.jpg");
+            }
+
+
+        }
 
     }
 }
