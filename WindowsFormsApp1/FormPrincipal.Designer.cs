@@ -148,7 +148,7 @@ namespace WindowsFormsApp1
             // 
             this.btnListar.Location = new System.Drawing.Point(80, 488);
             this.btnListar.Name = "btnListar";
-            this.btnListar.Size = new System.Drawing.Size(259, 52);
+            this.btnListar.Size = new System.Drawing.Size(259, 40);
             this.btnListar.TabIndex = 22;
             this.btnListar.Text = "Listar";
             this.btnListar.UseVisualStyleBackColor = true;
