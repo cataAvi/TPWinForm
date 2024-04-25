@@ -25,15 +25,25 @@ namespace negocio
                 {
                     Articulo aux = new Articulo();
                     
-                    aux.CodArticulo = (string)datos.Lector["Codigo"];
-                    aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Marca = new Marca();
-                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
-                    aux.Categoria = new Categoria();
-                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
-                    aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
-                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    if(!(datos.Lector["Codigo"] is DBNull))
+                        aux.CodArticulo = (string)datos.Lector["Codigo"];
+                    if (!(datos.Lector["Nombre"] is DBNull))
+                        aux.Nombre = (string)datos.Lector["Nombre"];
+                    if (!(datos.Lector["Descripcion"] is DBNull))
+                        aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    
+                   //if (!(datos.Lector["Marca"] is DBNull))
+                        aux.Marca = new Marca();
+                        aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                   // if (!(datos.Lector["Categoria"] is DBNull))
+                        aux.Categoria = new Categoria();
+                        aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    if (!(datos.Lector["ImagenUrl"] is DBNull))
+                        aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                    if (!(datos.Lector["Precio"] is DBNull))
+                        aux.Precio = (decimal)datos.Lector["Precio"];
+
+                    //Segun la base de datos, los campos que PUDEN ser nulos son: Codigo, Nombre, Descripción, Marca, Categoria y Precio (basicamente todo menos la pk que es el id)
 
                     lista.Add(aux);
                 }

@@ -22,5 +22,11 @@ namespace WindowsFormsApp1
              ListadoArticulos formla = new ListadoArticulos();
              formla.Show();
         }
+
+        private void buttonAgregar_Click(object sender, EventArgs e)
+        {
+            frmAltaArticulo alta = new frmAltaArticulo();
+            alta.ShowDialog();
+        }
     }
 }
