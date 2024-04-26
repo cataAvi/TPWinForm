@@ -93,5 +93,85 @@ namespace WindowsFormsApp1
             modificar.ShowDialog();
             cargar();
         }
+
+        private void comboBoxCampo_SelectedIndexChanged(object sender, EventArgs e) // dependiendo de la opcion selecionada en el comboBoxCampo vamos a mostrar la lista en comboBoxCriterio
+        {
+            string opcion = comboBoxCampo.SelectedItem.ToString();
+
+            if (opcion == "Precio")
+            {
+                comboBoxCriterio.Items.Clear();
+                comboBoxCriterio.Items.Add("Mayor a");
+                comboBoxCriterio.Items.Add("Menor a");
+                comboBoxCriterio.Items.Add("Igual a");
+            }
+            else
+            {
+                comboBoxCriterio.Items.Clear();
+                comboBoxCriterio.Items.Add("Comienza con");
+                comboBoxCriterio.Items.Add("Termina con");
+                comboBoxCriterio.Items.Add("Contiene");
+            }
+        }
+
+        private bool soloNumeros(string cadena) 
+        {
+            foreach (char caracter in cadena)
+            {
+                if (!(char.IsNumber(caracter)))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool validarFiltro() // Mensajes en caso de no filtrar correctamente
+        {
+            if (comboBoxCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor seleccione los campos para filtrar");
+                return true;
+            }
+            if (comboBoxCriterio.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor seleccione los campos para filtrar");
+                return true;
+            }
+            if (comboBoxCampo.SelectedItem.ToString() == "Precio")
+            {
+                if (string.IsNullOrEmpty(textBoxFiltro.Text))
+                {
+                    MessageBox.Show("Indicar el numero en el campo filtro");
+                    return true;
+                }
+                if (!(soloNumeros(textBoxFiltro.Text)))
+                {
+                    MessageBox.Show("Por favor ingresar solo numeros al filtrar por un campo numerico");
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void buttonBuscar_Click(object sender, EventArgs e) // Metodo para una vez colocado los filtros correctamente muestre los resultados
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            try
+            {
+                if (validarFiltro())
+                    return;
+
+                string campo = comboBoxCampo.SelectedItem.ToString();
+                string criterio = comboBoxCriterio.SelectedItem.ToString();
+                string filtro = textBoxFiltro.Text;
+                dataGridViewArticuloBD.DataSource = negocio.filtrar(campo, criterio, filtro);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

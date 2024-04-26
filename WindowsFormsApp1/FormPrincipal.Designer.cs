@@ -54,6 +54,7 @@ namespace WindowsFormsApp1
             this.buttonBuscar.Size = new System.Drawing.Size(37, 29);
             this.buttonBuscar.TabIndex = 21;
             this.buttonBuscar.UseVisualStyleBackColor = true;
+            this.buttonBuscar.Click += new System.EventHandler(this.buttonBuscar_Click);
             // 
             // comboBoxCriterio
             // 
@@ -70,6 +71,7 @@ namespace WindowsFormsApp1
             this.comboBoxCampo.Name = "comboBoxCampo";
             this.comboBoxCampo.Size = new System.Drawing.Size(139, 24);
             this.comboBoxCampo.TabIndex = 19;
+            this.comboBoxCampo.SelectedIndexChanged += new System.EventHandler(this.comboBoxCampo_SelectedIndexChanged);
             // 
             // textBoxFiltro
             // 
