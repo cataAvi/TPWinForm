@@ -114,7 +114,7 @@ namespace negocio
 
             try
             {
-                datos.setarConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, Precio, IdMarca, IdCategoria)values(@codigo, @nombre, @descripcion, @precio, @idMarca, @idCategoria, , @imagen)");
+                datos.setarConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, Precio, IdMarca, IdCategoria)values(@codigo, @nombre, @descripcion, @precio, @idMarca, @idCategoria)");
                 datos.setearParametro("@codigo", nuevoArticulo.CodArticulo);
                 datos.setearParametro("@nombre", nuevoArticulo.Nombre);
                 datos.setearParametro("@descripcion", nuevoArticulo.Descripcion);
@@ -134,7 +134,7 @@ namespace negocio
                 datos.cerrarConexion();
             }
 
-            try
+            /*try
             {
                 datos.setarConsulta("INSERT INTO [CATALOGO_P3_DB].[dbo].[IMAGENES] ([IdArticulo], [ImagenUrl]) VALUES (@idArticulo, @imagenUrl)");
                 datos.setearParametro("@imagen", nuevoArticulo.ImagenUrl);
@@ -150,7 +150,9 @@ namespace negocio
             finally
             {
                 datos.cerrarConexion();
-            }
+            }*/
+            
+            //Acá pincha el agregar artículos
         }
 
         public void eliminar(int id)
@@ -161,6 +163,8 @@ namespace negocio
                 datos.setarConsulta("Delete from ARTICULOS Where Id = @id");
                 datos.setearParametro("@id", id);
                 datos.ejectuarAccion();
+
+                //Agregar a este metodo borrar todos los registros de la tabla imagenes que correspondan al mismo artículo
             }
             catch (Exception ex)
             {
