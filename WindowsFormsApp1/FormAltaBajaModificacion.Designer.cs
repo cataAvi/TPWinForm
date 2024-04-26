@@ -80,6 +80,7 @@ namespace WindowsFormsApp1
             this.textBoxUrlImagen.Name = "textBoxUrlImagen";
             this.textBoxUrlImagen.Size = new System.Drawing.Size(171, 22);
             this.textBoxUrlImagen.TabIndex = 40;
+            this.textBoxUrlImagen.Leave += new System.EventHandler(this.textBoxUrlImagen_Leave);
             // 
             // labelUrlImagen
             // 
@@ -134,6 +135,7 @@ namespace WindowsFormsApp1
             this.buttonCancelar.TabIndex = 44;
             this.buttonCancelar.Text = "Cancelar";
             this.buttonCancelar.UseVisualStyleBackColor = true;
+            this.buttonCancelar.Click += new System.EventHandler(this.buttonCancelar_Click);
             // 
             // buttonAceptar
             // 
@@ -143,6 +145,7 @@ namespace WindowsFormsApp1
             this.buttonAceptar.TabIndex = 43;
             this.buttonAceptar.Text = "Aceptar";
             this.buttonAceptar.UseVisualStyleBackColor = true;
+            this.buttonAceptar.Click += new System.EventHandler(this.buttonAceptar_Click);
             // 
             // textBoxDescripcion
             // 
@@ -216,6 +219,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.labelCodArticulo);
             this.Name = "FormAltaBajaModificacion";
             this.Text = "Alta/Baja/Modificacion";
+            this.Load += new System.EventHandler(this.FormAltaBajaModificacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArticulo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

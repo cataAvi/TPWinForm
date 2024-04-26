@@ -17,15 +17,16 @@ namespace negocio
 
             try
             {
-                datos.setarConsulta("select A.Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion as Categoria, M.Descripcion as Marca,  I.ImagenUrl as ImagenUrl from ARTICULOS as A inner join MARCAS AS M on IdMarca = M.Id inner join CATEGORIAS AS C on IdCategoria = C.Id inner join IMAGENES AS I on C.Id = I.IdArticulo");
+                datos.setarConsulta("SELECT A.Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion AS Categoria, M.Descripcion AS Marca, (SELECT TOP 1 ImagenUrl FROM IMAGENES WHERE IdArticulo = A.Id) AS ImagenUrl, A.Id, A.IdMarca, A.IdCategoria FROM ARTICULOS A INNER JOIN CATEGORIAS C ON C.Id = A.IdCategoria INNER JOIN MARCAS M ON M.Id = A.IdMarca");
                 datos.ejectuarLectura();
 
 
                 while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
-                    
-                    if(!(datos.Lector["Codigo"] is DBNull))
+
+                    aux.Id = (int)datos.Lector["Id"];
+                    if (!(datos.Lector["Codigo"] is DBNull))
                         aux.CodArticulo = (string)datos.Lector["Codigo"];
                     if (!(datos.Lector["Nombre"] is DBNull))
                         aux.Nombre = (string)datos.Lector["Nombre"];
@@ -34,9 +35,11 @@ namespace negocio
                     
                    //if (!(datos.Lector["Marca"] is DBNull))
                         aux.Marca = new Marca();
+                        aux.Marca.Id = (int)datos.Lector["IdMarca"];
                         aux.Marca.Descripcion = (string)datos.Lector["Marca"];
                    // if (!(datos.Lector["Categoria"] is DBNull))
                         aux.Categoria = new Categoria();
+                        aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
                         aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
                     if (!(datos.Lector["ImagenUrl"] is DBNull))
                         aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
@@ -65,15 +68,32 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setarConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, ImagenUrl = @imagen, IdMarca = @idMarca, IdCategoria = @idCategoria, Precio = @precio where Id = @id");
+                datos.setarConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, IdMarca = @idMarca, IdCategoria = @idCategoria, Precio = @precio where Id = @id");
                 datos.setearParametro("@id", art.Id);
                 datos.setearParametro("@codigo", art.CodArticulo);
                 datos.setearParametro("@nombre", art.Nombre);
                 datos.setearParametro("@descripcion", art.Descripcion);
                 datos.setearParametro("idMarca", art.Marca.Id);
                 datos.setearParametro("@idCategoria", art.Categoria.Id);
-                datos.setearParametro("@imagen", art.ImagenUrl);
                 datos.setearParametro("@precio", art.Precio);
+
+                datos.ejectuarAccion();
+
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            try
+            {
+                datos.setarConsulta("update IMAGENES set ImagenUrl = @imagen where IdArticulo = " + art.Id);
+                datos.setearParametro("@imagen", art.ImagenUrl);
 
                 datos.ejectuarAccion();
             }
@@ -85,6 +105,7 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
+
         }
 
         public void agregar(Articulo nuevoArticulo)
@@ -93,20 +114,37 @@ namespace negocio
 
             try
             {
-                datos.setarConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, Precio, IdMarca, IdCategoria)values(@codigo, @nombre, @descripcion, @precio, @idMarca, @idCategoria)");
+                datos.setarConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, Precio, IdMarca, IdCategoria)values(@codigo, @nombre, @descripcion, @precio, @idMarca, @idCategoria, , @imagen)");
                 datos.setearParametro("@codigo", nuevoArticulo.CodArticulo);
                 datos.setearParametro("@nombre", nuevoArticulo.Nombre);
                 datos.setearParametro("@descripcion", nuevoArticulo.Descripcion);
                 datos.setearParametro("@precio", nuevoArticulo.Precio);
                 datos.setearParametro("@idMarca", nuevoArticulo.Marca.Id);
                 datos.setearParametro("@idCategoria", nuevoArticulo.Categoria.Id);
-                //datos.setearParametro("@imagen", nuevoArticulo.ImagenUrl);
                 datos.ejectuarAccion();
 
 
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            try
+            {
+                datos.setarConsulta("INSERT INTO [CATALOGO_P3_DB].[dbo].[IMAGENES] ([IdArticulo], [ImagenUrl]) VALUES (@idArticulo, @imagenUrl)");
+                datos.setearParametro("@imagen", nuevoArticulo.ImagenUrl);
+                datos.setearParametro("@idArticulo", nuevoArticulo.Id);
+
+                datos.ejectuarAccion();
+            }
+            catch (Exception ex)
+            {
+
                 throw ex;
             }
             finally
@@ -137,7 +175,7 @@ namespace negocio
 
             try
             {
-                string consulta = "select A.Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion Categoria, M.Descripcion Marca, A.ImagenUrl, A.Id, A.IdMarca, A.IdCategoria from ARTICULOS A, CATEGORIAS C, MARCAS M where C.Id=A.IdCategoria and M.Id=A.IdMarca and ";
+                string consulta = "select A.Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion Categoria, M.Descripcion Marca, I.ImagenUrl, A.Id, A.IdMarca, A.IdCategoria from ARTICULOS A, CATEGORIAS C, MARCAS M, IMAGENES I where C.Id=A.IdCategoria and M.Id=A.IdMarca and A.Id=I.IdArticulo and ";
                 if (campo == "Precio")
                 {
                     switch (criterio)
