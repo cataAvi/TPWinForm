@@ -20,6 +20,14 @@ namespace dominio
         [DisplayName("Categoría")]
         public Categoria Categoria { get; set; }
         public string ImagenUrl { get; set; }
+        public List<string> Imagenes { get; set; }
+        public int indiceImg { get; set; }
         public decimal Precio { get; set; }
+
+        //METODOS
+        public Articulo()
+        {
+            indiceImg = 0;
+        }
     }
 }

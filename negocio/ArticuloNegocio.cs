@@ -10,6 +10,38 @@ namespace negocio
 {
     public class ArticuloNegocio
     {
+
+        public List<string> vectorImagenes (int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<string> lista = new List<string>();
+
+
+            try
+            {
+                datos.setarConsulta("select Id, idArticulo, ImagenUrl from IMAGENES");
+                datos.ejectuarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    if (!((datos.Lector["ImagenUrl"] is DBNull)) && (id == (int)datos.Lector["IdArticulo"]))
+                        lista.Add((string)datos.Lector["ImagenUrl"]); 
+
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
         public List<Articulo> listar()
         {
             List<Articulo> lista = new List<Articulo>();
@@ -17,7 +49,7 @@ namespace negocio
 
             try
             {
-                datos.setarConsulta("SELECT A.Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion AS Categoria, M.Descripcion AS Marca, (SELECT TOP 1 ImagenUrl FROM IMAGENES WHERE IdArticulo = A.Id) AS ImagenUrl, A.Id, A.IdMarca, A.IdCategoria FROM ARTICULOS A INNER JOIN CATEGORIAS C ON C.Id = A.IdCategoria INNER JOIN MARCAS M ON M.Id = A.IdMarca");
+                datos.setarConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion AS Categoria, M.Descripcion AS Marca, (SELECT TOP 1 ImagenUrl FROM IMAGENES WHERE IdArticulo = A.Id) AS ImagenUrl, A.IdMarca, A.IdCategoria FROM ARTICULOS A INNER JOIN CATEGORIAS C ON C.Id = A.IdCategoria INNER JOIN MARCAS M ON M.Id = A.IdMarca");
                 datos.ejectuarLectura();
 
 
@@ -46,7 +78,7 @@ namespace negocio
                     if (!(datos.Lector["Precio"] is DBNull))
                         aux.Precio = (decimal)datos.Lector["Precio"];
 
-                    //Segun la base de datos, los campos que PUDEN ser nulos son: Codigo, Nombre, Descripción, Marca, Categoria y Precio (basicamente todo menos la pk que es el id)
+                    //Segun la base de datos, los campos que PUEDEN ser nulos son: Codigo, Nombre, Descripción, Marca, Categoria y Precio (basicamente todo menos la pk que es el id)
 
                     lista.Add(aux);
                 }

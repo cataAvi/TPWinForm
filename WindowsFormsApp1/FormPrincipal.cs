@@ -41,7 +41,11 @@ namespace WindowsFormsApp1
                 listaArticulo = negocio.listar();
                 dataGridViewArticuloBD.DataSource = listaArticulo;
                 ocultarColumnas();
-                cargarImagen(listaArticulo[0].ImagenUrl);
+                //cargarImagen(listaArticulo[0].ImagenUrl);
+                List<string> imagenes = new List<string>();
+                imagenes = negocio.vectorImagenes(listaArticulo[0].Id);
+                cargarImagen(imagenes[listaArticulo[0].indiceImg]);
+
             }
             catch (Exception ex)
             {
@@ -73,7 +77,10 @@ namespace WindowsFormsApp1
             if (dataGridViewArticuloBD.CurrentRow != null)
             {
                 Articulo selecionado = (Articulo)dataGridViewArticuloBD.CurrentRow.DataBoundItem;
-                cargarImagen(selecionado.ImagenUrl);
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                List<string> lista = new List<string>();
+                lista = negocio.vectorImagenes(selecionado.Id);
+                cargarImagen(lista[selecionado.indiceImg]);
             }
         }
 
@@ -194,6 +201,42 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btNext_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            Articulo seleccionado;
+
+            seleccionado = (Articulo)dataGridViewArticuloBD.CurrentRow.DataBoundItem;
+            List<string> lista = new List<string>();
+            lista = negocio.vectorImagenes(seleccionado.Id);
+            int maximo = lista.Count;
+
+            if (seleccionado.indiceImg < maximo - 1)
+                seleccionado.indiceImg++;
+            else if (seleccionado.indiceImg == maximo - 1)
+                seleccionado.indiceImg = 0;
+
+            cargarImagen(lista[seleccionado.indiceImg]);
+        }
+
+        private void btPrevious_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            Articulo seleccionado;
+
+            seleccionado = (Articulo)dataGridViewArticuloBD.CurrentRow.DataBoundItem;
+            List<string> lista = new List<string>();
+            lista = negocio.vectorImagenes(seleccionado.Id);
+            int maximo = lista.Count;
+
+            if (seleccionado.indiceImg == 0)
+                seleccionado.indiceImg = maximo - 1;
+            else 
+                seleccionado.indiceImg --;
+
+            cargarImagen(lista[seleccionado.indiceImg]);
         }
     }
 }

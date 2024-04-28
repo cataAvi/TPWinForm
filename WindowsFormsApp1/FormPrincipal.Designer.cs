@@ -41,6 +41,8 @@ namespace WindowsFormsApp1
             this.buttonAgregar = new System.Windows.Forms.Button();
             this.pictureBoxArticulo = new System.Windows.Forms.PictureBox();
             this.dataGridViewArticuloBD = new System.Windows.Forms.DataGridView();
+            this.btNext = new System.Windows.Forms.Button();
+            this.btPrevious = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArticulo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewArticuloBD)).BeginInit();
             this.SuspendLayout();
@@ -132,7 +134,7 @@ namespace WindowsFormsApp1
             // 
             this.pictureBoxArticulo.Location = new System.Drawing.Point(416, 329);
             this.pictureBoxArticulo.Name = "pictureBoxArticulo";
-            this.pictureBoxArticulo.Size = new System.Drawing.Size(483, 237);
+            this.pictureBoxArticulo.Size = new System.Drawing.Size(472, 203);
             this.pictureBoxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxArticulo.TabIndex = 12;
             this.pictureBoxArticulo.TabStop = false;
@@ -149,11 +151,33 @@ namespace WindowsFormsApp1
             this.dataGridViewArticuloBD.TabIndex = 11;
             this.dataGridViewArticuloBD.SelectionChanged += new System.EventHandler(this.dataGridViewArticuloBD_SelectionChanged);
             // 
+            // btNext
+            // 
+            this.btNext.Location = new System.Drawing.Point(673, 562);
+            this.btNext.Name = "btNext";
+            this.btNext.Size = new System.Drawing.Size(75, 23);
+            this.btNext.TabIndex = 22;
+            this.btNext.Text = ">";
+            this.btNext.UseVisualStyleBackColor = true;
+            this.btNext.Click += new System.EventHandler(this.btNext_Click);
+            // 
+            // btPrevious
+            // 
+            this.btPrevious.Location = new System.Drawing.Point(577, 562);
+            this.btPrevious.Name = "btPrevious";
+            this.btPrevious.Size = new System.Drawing.Size(75, 23);
+            this.btPrevious.TabIndex = 23;
+            this.btPrevious.Text = "<";
+            this.btPrevious.UseVisualStyleBackColor = true;
+            this.btPrevious.Click += new System.EventHandler(this.btPrevious_Click);
+            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1020, 610);
+            this.Controls.Add(this.btPrevious);
+            this.Controls.Add(this.btNext);
             this.Controls.Add(this.buttonBuscar);
             this.Controls.Add(this.comboBoxCriterio);
             this.Controls.Add(this.comboBoxCampo);
@@ -188,5 +212,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button buttonAgregar;
         private System.Windows.Forms.PictureBox pictureBoxArticulo;
         private System.Windows.Forms.DataGridView dataGridViewArticuloBD;
+        private System.Windows.Forms.Button btNext;
+        private System.Windows.Forms.Button btPrevious;
     }
 }
