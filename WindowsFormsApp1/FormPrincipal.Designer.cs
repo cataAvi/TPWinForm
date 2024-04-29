@@ -43,6 +43,9 @@ namespace WindowsFormsApp1
             this.dataGridViewArticuloBD = new System.Windows.Forms.DataGridView();
             this.btNext = new System.Windows.Forms.Button();
             this.btPrevious = new System.Windows.Forms.Button();
+            this.btAgregarImg = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArticulo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewArticuloBD)).BeginInit();
             this.SuspendLayout();
@@ -102,7 +105,7 @@ namespace WindowsFormsApp1
             // 
             // buttonEliminar
             // 
-            this.buttonEliminar.Location = new System.Drawing.Point(80, 442);
+            this.buttonEliminar.Location = new System.Drawing.Point(42, 446);
             this.buttonEliminar.Name = "buttonEliminar";
             this.buttonEliminar.Size = new System.Drawing.Size(259, 40);
             this.buttonEliminar.TabIndex = 15;
@@ -112,7 +115,7 @@ namespace WindowsFormsApp1
             // 
             // buttonModificiar
             // 
-            this.buttonModificiar.Location = new System.Drawing.Point(80, 396);
+            this.buttonModificiar.Location = new System.Drawing.Point(42, 396);
             this.buttonModificiar.Name = "buttonModificiar";
             this.buttonModificiar.Size = new System.Drawing.Size(259, 40);
             this.buttonModificiar.TabIndex = 14;
@@ -122,7 +125,7 @@ namespace WindowsFormsApp1
             // 
             // buttonAgregar
             // 
-            this.buttonAgregar.Location = new System.Drawing.Point(80, 350);
+            this.buttonAgregar.Location = new System.Drawing.Point(42, 350);
             this.buttonAgregar.Name = "buttonAgregar";
             this.buttonAgregar.Size = new System.Drawing.Size(259, 40);
             this.buttonAgregar.TabIndex = 13;
@@ -132,9 +135,9 @@ namespace WindowsFormsApp1
             // 
             // pictureBoxArticulo
             // 
-            this.pictureBoxArticulo.Location = new System.Drawing.Point(416, 329);
+            this.pictureBoxArticulo.Location = new System.Drawing.Point(376, 329);
             this.pictureBoxArticulo.Name = "pictureBoxArticulo";
-            this.pictureBoxArticulo.Size = new System.Drawing.Size(472, 203);
+            this.pictureBoxArticulo.Size = new System.Drawing.Size(312, 203);
             this.pictureBoxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxArticulo.TabIndex = 12;
             this.pictureBoxArticulo.TabStop = false;
@@ -153,7 +156,7 @@ namespace WindowsFormsApp1
             // 
             // btNext
             // 
-            this.btNext.Location = new System.Drawing.Point(673, 562);
+            this.btNext.Location = new System.Drawing.Point(569, 562);
             this.btNext.Name = "btNext";
             this.btNext.Size = new System.Drawing.Size(75, 23);
             this.btNext.TabIndex = 22;
@@ -163,7 +166,7 @@ namespace WindowsFormsApp1
             // 
             // btPrevious
             // 
-            this.btPrevious.Location = new System.Drawing.Point(577, 562);
+            this.btPrevious.Location = new System.Drawing.Point(488, 562);
             this.btPrevious.Name = "btPrevious";
             this.btPrevious.Size = new System.Drawing.Size(75, 23);
             this.btPrevious.TabIndex = 23;
@@ -171,11 +174,42 @@ namespace WindowsFormsApp1
             this.btPrevious.UseVisualStyleBackColor = true;
             this.btPrevious.Click += new System.EventHandler(this.btPrevious_Click);
             // 
+            // btAgregarImg
+            // 
+            this.btAgregarImg.Location = new System.Drawing.Point(725, 421);
+            this.btAgregarImg.Name = "btAgregarImg";
+            this.btAgregarImg.Size = new System.Drawing.Size(259, 40);
+            this.btAgregarImg.TabIndex = 24;
+            this.btAgregarImg.Text = "Agregar Imagen";
+            this.btAgregarImg.UseVisualStyleBackColor = true;
+            this.btAgregarImg.Click += new System.EventHandler(this.btAgregarImg_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(725, 329);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(259, 40);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "Agregar Marca";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(725, 375);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(259, 40);
+            this.button2.TabIndex = 26;
+            this.button2.Text = "Agregar Categoria";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1020, 610);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btAgregarImg);
             this.Controls.Add(this.btPrevious);
             this.Controls.Add(this.btNext);
             this.Controls.Add(this.buttonBuscar);
@@ -214,5 +248,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.DataGridView dataGridViewArticuloBD;
         private System.Windows.Forms.Button btNext;
         private System.Windows.Forms.Button btPrevious;
+        private System.Windows.Forms.Button btAgregarImg;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

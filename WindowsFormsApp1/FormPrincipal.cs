@@ -67,7 +67,7 @@ namespace WindowsFormsApp1
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al cargar la imagen: " + ex.Message);
+                //Console.WriteLine("Error al cargar la imagen: " + ex.Message);
                 pictureBoxArticulo.Load("https://www.came-educativa.com.ar/wp-content/uploads/2022/03/placeholder-3.png");
             }
         }
@@ -80,7 +80,14 @@ namespace WindowsFormsApp1
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 List<string> lista = new List<string>();
                 lista = negocio.vectorImagenes(selecionado.Id);
-                cargarImagen(lista[selecionado.indiceImg]);
+                try
+                {
+                    cargarImagen(lista[selecionado.indiceImg]);
+                }
+                catch (Exception ex)
+                {
+                    cargarImagen("https://www.google.com/url?sa=i&url=https%3A%2F%2Fes.vecteezy.com%2Farte-vectorial%2F4141669-sin-foto-o-imagen-en-blanco-icono-cargando-imagenes-o-imagen-faltante-marca-imagen-no-disponible-o-imagen-proxima-firmar-simple-naturaleza-silueta-en-marco-ilustracion-vectorial-aislada&psig=AOvVaw1ZXUe6w0_LG2hEINy0rxN0&ust=1714442133108000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJiq3eeo5oUDFQAAAAAdAAAAABAE");
+                }
             }
         }
 
@@ -237,6 +244,16 @@ namespace WindowsFormsApp1
                 seleccionado.indiceImg --;
 
             cargarImagen(lista[seleccionado.indiceImg]);
+        }
+
+        private void btAgregarImg_Click(object sender, EventArgs e)
+        {
+            Articulo selecionado;
+            selecionado = (Articulo)dataGridViewArticuloBD.CurrentRow.DataBoundItem;
+
+            sumarImagen aux = new sumarImagen(selecionado);
+            aux.ShowDialog();
+
         }
     }
 }

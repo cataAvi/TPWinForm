@@ -104,7 +104,10 @@ namespace WindowsFormsApp1
                 else
                 {
                     negocio.agregar(articuloAux);
+                    negocio.agregarImagen(negocio.leerDatos(articuloAux));
                     MessageBox.Show("Articulo agregado en el inventario");
+                    //Agregar registro de imagen
+
                 }
 
                 Close();

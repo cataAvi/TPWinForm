@@ -25,7 +25,8 @@ namespace negocio
                 while (datos.Lector.Read())
                 {
                     if (!((datos.Lector["ImagenUrl"] is DBNull)) && (id == (int)datos.Lector["IdArticulo"]))
-                        lista.Add((string)datos.Lector["ImagenUrl"]); 
+                        lista.Add((string)datos.Lector["ImagenUrl"]);
+                            
 
                 }
 
@@ -39,6 +40,32 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
+
+        }
+
+        public Articulo leerDatos(Articulo aux)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            datos.setarConsulta("SELECT Id, Codigo, Nombre, Descripcion, Precio from ARTICULOS");
+            datos.ejectuarLectura();
+
+            while (datos.Lector.Read())
+            {
+                if ((string)datos.Lector["Codigo"] == aux.CodArticulo)
+
+                {
+                    aux.Id = (int)datos.Lector["Id"];
+                    if (!(datos.Lector["Nombre"] is DBNull))
+                        aux.Nombre = (string)datos.Lector["Nombre"];
+                    if (!(datos.Lector["Descripcion"] is DBNull))
+                        aux.Descripcion = (string)datos.Lector["Descripcion"];
+                }
+
+
+            }
+
+            return aux;
 
         }
 
@@ -138,6 +165,28 @@ namespace negocio
                 datos.cerrarConexion();
             }
 
+        }
+
+        public void agregarImagen(Articulo nuevoArticulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setarConsulta("INSERT INTO [CATALOGO_P3_DB].[dbo].[IMAGENES] ([IdArticulo], [ImagenUrl]) VALUES (@idArticulo, @imagenUrl)");
+                datos.setearParametro("@idArticulo", nuevoArticulo.Id);
+                datos.setearParametro("@imagenUrl", nuevoArticulo.ImagenUrl);
+                datos.ejectuarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
 
         public void agregar(Articulo nuevoArticulo)

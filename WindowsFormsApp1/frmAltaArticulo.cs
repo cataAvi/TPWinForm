@@ -40,6 +40,7 @@ namespace WindowsFormsApp1
                 art.Categoria = (Categoria)cbCategoria.SelectedItem;
 
                 negocio.agregar(art);
+                negocio.agregarImagen(negocio.leerDatos(art));
                 MessageBox.Show("Agregado exitosamente");
                 Close();
                     
