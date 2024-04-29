@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="agregarCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="agregarCategoria.Designer.cs">
+      <DependentUpon>agregarCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="agregarMarca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="agregarMarca.Designer.cs">
+      <DependentUpon>agregarMarca.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +90,12 @@
     <Compile Include="sumarImagen.Designer.cs">
       <DependentUpon>sumarImagen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="agregarCategoria.resx">
+      <DependentUpon>agregarCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="agregarMarca.resx">
+      <DependentUpon>agregarMarca.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

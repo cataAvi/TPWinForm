@@ -156,7 +156,7 @@ namespace WindowsFormsApp1
             // 
             // btNext
             // 
-            this.btNext.Location = new System.Drawing.Point(569, 562);
+            this.btNext.Location = new System.Drawing.Point(523, 550);
             this.btNext.Name = "btNext";
             this.btNext.Size = new System.Drawing.Size(75, 23);
             this.btNext.TabIndex = 22;
@@ -166,7 +166,7 @@ namespace WindowsFormsApp1
             // 
             // btPrevious
             // 
-            this.btPrevious.Location = new System.Drawing.Point(488, 562);
+            this.btPrevious.Location = new System.Drawing.Point(442, 550);
             this.btPrevious.Name = "btPrevious";
             this.btPrevious.Size = new System.Drawing.Size(75, 23);
             this.btPrevious.TabIndex = 23;
@@ -176,7 +176,7 @@ namespace WindowsFormsApp1
             // 
             // btAgregarImg
             // 
-            this.btAgregarImg.Location = new System.Drawing.Point(725, 421);
+            this.btAgregarImg.Location = new System.Drawing.Point(725, 442);
             this.btAgregarImg.Name = "btAgregarImg";
             this.btAgregarImg.Size = new System.Drawing.Size(259, 40);
             this.btAgregarImg.TabIndex = 24;
@@ -186,21 +186,23 @@ namespace WindowsFormsApp1
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(725, 329);
+            this.button1.Location = new System.Drawing.Point(725, 350);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(259, 40);
             this.button1.TabIndex = 25;
             this.button1.Text = "Agregar Marca";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(725, 375);
+            this.button2.Location = new System.Drawing.Point(725, 396);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(259, 40);
             this.button2.TabIndex = 26;
             this.button2.Text = "Agregar Categoria";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // FormPrincipal
             // 

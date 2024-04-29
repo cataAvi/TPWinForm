@@ -255,5 +255,17 @@ namespace WindowsFormsApp1
             aux.ShowDialog();
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            agregarMarca aux = new agregarMarca();
+            aux.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            agregarCategoria aux = new agregarCategoria();
+            aux.ShowDialog();
+        }
     }
 }
